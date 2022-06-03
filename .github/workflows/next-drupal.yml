@@ -1,0 +1,23 @@
+name: next-drupal
+on:
+  push:
+  pull_request:
+    branches:
+      - main
+
+env:
+  DRUPAL_BASE_URL: ${{ secrets.DRUPAL_BASE_URL }}
+  DRUPAL_USERNAME: ${{ secrets.DRUPAL_USERNAME }}
+  DRUPAL_PASSWORD: ${{ secrets.DRUPAL_PASSWORD }}
+  DRUPAL_CLIENT_ID: ${{ secrets.DRUPAL_CLIENT_ID }}
+  DRUPAL_CLIENT_SECRET: ${{ secrets.DRUPAL_CLIENT_SECRET }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install modules
+        run: yarn
+      - name: Run tests
+        run: yarn test
